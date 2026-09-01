@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#F8F9FA] text-[#202124] antialiased selection:bg-[#4285F4] selection:text-white;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F3F4;
+}
+::-webkit-scrollbar-thumb {
+  background: #BDC1C6;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9AA0A6;
+}
+
+/* Glassmorphism helpers */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(218, 220, 224, 0.8);
+}
+
+.dark-glass-panel {
+  background: rgba(24, 26, 32, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Subtle dot background */
+.bg-grid-pattern {
+  background-size: 24px 24px;
+  background-image: radial-gradient(circle, #DADCE0 1px, transparent 1px);
+}
+
+.dark .bg-grid-pattern, .bg-grid-dark {
+  background-size: 24px 24px;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+}
+
+/* Animated gradient text */
+.text-gradient-google {
+  background: linear-gradient(135deg, #4285F4 0%, #EA4335 35%, #FBBC04 70%, #34A853 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-blue {
+  background: linear-gradient(135deg, #1A73E8 0%, #4285F4 50%, #8AB4F8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-quantum {
+  background: linear-gradient(135deg, #A142F4 0%, #4285F4 50%, #24C1E0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+}

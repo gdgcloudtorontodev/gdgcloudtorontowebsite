@@ -1,0 +1,128 @@
+import { RadarItem } from '../types';
+
+export const TECH_RADAR_ITEMS: RadarItem[] = [
+  // ADOPT
+  {
+    id: 'radar-gemini',
+    name: 'Gemini 1.5/2.0 Multimodal API',
+    category: 'AI & Agents',
+    ring: 'ADOPT',
+    description: 'Native cross-modal reasoning, 2M+ token contexts, and reliable function calling for production applications.',
+    trend: 'UP',
+    tags: ['Multimodal', 'LLM', 'Google DeepMind'],
+  },
+  {
+    id: 'radar-gke',
+    name: 'Google Kubernetes Engine (GKE)',
+    category: 'Cloud & Compute',
+    ring: 'ADOPT',
+    description: 'The industry-standard managed container platform with automated GPU node scaling and cluster autopilot.',
+    trend: 'STABLE',
+    tags: ['Containers', 'Kubernetes', 'GCP'],
+  },
+  {
+    id: 'radar-vllm',
+    name: 'vLLM PagedAttention Inference',
+    category: 'Infrastructure & Hardware',
+    ring: 'ADOPT',
+    description: 'High-throughput LLM serving engine with continuous batching and optimal GPU KV cache allocation.',
+    trend: 'UP',
+    tags: ['Inference', 'Open Source', 'GPU'],
+  },
+  {
+    id: 'radar-bigquery-ml',
+    name: 'BigQuery ML & Vector Search',
+    category: 'Cloud & Compute',
+    ring: 'ADOPT',
+    description: 'In-database SQL machine learning and vector search directly on enterprise analytical warehouses.',
+    trend: 'STABLE',
+    tags: ['Data Warehouse', 'SQL', 'Vectors'],
+  },
+
+  // TRIAL
+  {
+    id: 'radar-mcp',
+    name: 'Model Context Protocol (MCP)',
+    category: 'AI & Agents',
+    ring: 'TRIAL',
+    description: 'Standardized open protocol connecting AI models securely to local data, developer IDEs, and internal enterprise APIs.',
+    trend: 'NEW',
+    tags: ['Protocol', 'Agents', 'Tooling'],
+  },
+  {
+    id: 'radar-langgraph',
+    name: 'LangGraph Multi-Agent Orchestration',
+    category: 'AI & Agents',
+    ring: 'TRIAL',
+    description: 'Stateful, cyclic multi-actor graph framework for building resilient, collaborative agentic teams.',
+    trend: 'UP',
+    tags: ['Agents', 'State Machines', 'Python/TS'],
+  },
+  {
+    id: 'radar-gemma-local',
+    name: 'Gemma 2 On-Device / Private Serving',
+    category: 'AI & Agents',
+    ring: 'TRIAL',
+    description: 'Open-weights models running with high token throughput on edge devices and private VPCs.',
+    trend: 'UP',
+    tags: ['Open Weights', 'Privacy', 'Edge AI'],
+  },
+  {
+    id: 'radar-tpu-v5p',
+    name: 'Cloud TPU v5p & v6 Accelerators',
+    category: 'Infrastructure & Hardware',
+    ring: 'TRIAL',
+    description: 'Next-generation optical circuit switched TPU pods tailored for large scale frontier training.',
+    trend: 'UP',
+    tags: ['Hardware', 'TPU', 'ASIC'],
+  },
+
+  // ASSESS
+  {
+    id: 'radar-deepseek-r1',
+    name: 'Pure RL Test-Time Reasoning (R1)',
+    category: 'AI & Agents',
+    ring: 'ASSESS',
+    description: 'Incentivized reinforcement learning reasoning models that self-reflect and verify before answering.',
+    trend: 'NEW',
+    tags: ['Reasoning', 'Reinforcement Learning', 'Open Weights'],
+  },
+  {
+    id: 'radar-cirq-qvm',
+    name: 'Google Cirq & Quantum Virtual Machines',
+    category: 'Quantum & Next-Gen',
+    ring: 'ASSESS',
+    description: 'Writing hybrid variational quantum algorithms and exploring quantum machine learning in the cloud.',
+    trend: 'UP',
+    tags: ['Quantum', 'Cirq', 'Algorithms'],
+  },
+  {
+    id: 'radar-embodied-vla',
+    name: 'Embodied Vision-Language-Action Models',
+    category: 'AI & Agents',
+    ring: 'ASSESS',
+    description: 'Foundational models directly outputting low-level physical robotic trajectories in unstructured environments.',
+    trend: 'NEW',
+    tags: ['Robotics', 'Embodied AI', 'VLA'],
+  },
+
+  // WATCH
+  {
+    id: 'radar-qec-sycamore',
+    name: 'Fault-Tolerant Quantum Error Correction',
+    category: 'Quantum & Next-Gen',
+    ring: 'WATCH',
+    description: 'Logical qubits operating below physical noise error thresholds toward scalable fault tolerance.',
+    trend: 'STABLE',
+    tags: ['Quantum Hardware', 'Qubits', 'Physics'],
+  },
+  {
+    id: 'radar-photonic-compute',
+    name: 'Photonic Optical Matrix Multipliers',
+    category: 'Infrastructure & Hardware',
+    ring: 'WATCH',
+    description: 'Using light waves for zero-latency, sub-watt mathematical operations in neural accelerators.',
+    trend: 'NEW',
+    tags: ['Photonic', 'Optical Compute', 'Silicon'],
+  },
+];
