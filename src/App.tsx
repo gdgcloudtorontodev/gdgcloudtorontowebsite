@@ -21,6 +21,7 @@ import { ResourceCenter } from './components/sections/ResourceCenter';
 import { RegistrationModal } from './components/sections/RegistrationModal';
 import { ContactModal } from './components/sections/ContactModal';
 import { CommunityGrowthInsights } from './components/sections/CommunityGrowthInsights';
+import { NonDevfestCertificate } from './components/sections/NonDevfestCertificate';
 import { Sparkles, ArrowRight, MapPin, Calendar, Ticket, Globe, ExternalLink, Users } from 'lucide-react';
 import { EVENT_DATA } from './data/event';
 
@@ -170,6 +171,9 @@ export const App: React.FC = () => {
             </div>
           </div>
         </section>
+
+        {/* 28. Download Certificate - Non DevFest Event/Workshop */}
+        <NonDevfestCertificate />
       </main>
 
       {/* Global Footer */}

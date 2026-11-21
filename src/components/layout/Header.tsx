@@ -22,7 +22,8 @@ import {
   ExternalLink, 
   Users, 
   Activity,
-  Mail
+  Mail,
+  GraduationCap
 } from 'lucide-react';
 import { YoutubeIcon, InstagramIcon } from '../ui/BrandIcons';
 import { SponsorTicker } from './SponsorTicker';
@@ -58,6 +59,7 @@ export const Header: React.FC<HeaderProps> = ({
     { label: 'Sponsors', href: '#sponsors', icon: Building2 },
     { label: 'Meet Team', href: '#team', icon: Users },
     { label: 'Certificate', href: '#my-certificate', icon: FileCheck },
+    { label: 'Non-DevFest Certs', href: '#non-devfest-certificates', icon: GraduationCap },
     { label: 'Awards & Recognition', href: '#awards-recognitions', icon: Award },
   ];
 
@@ -129,8 +131,17 @@ export const Header: React.FC<HeaderProps> = ({
               title="Download Participant or Volunteer Certificate"
             >
               <FileCheck className="w-3 h-3 text-google-yellow" />
-              <span>My Certificate</span>
+              <span>DevFest Cert</span>
             </button>
+            <span className="text-gray-600 hidden md:inline">•</span>
+            <a
+              href="#non-devfest-certificates"
+              className="text-gray-300 hover:text-white flex items-center gap-1 transition-colors font-medium hidden md:flex text-[11px]"
+              title="Download Certificate - Non DevFest Event/Workshop"
+            >
+              <GraduationCap className="w-3 h-3 text-google-green" />
+              <span>Workshop Cert</span>
+            </a>
             <span className="text-gray-600">•</span>
             <button
               onClick={onOpenCommandPalette}
@@ -344,10 +355,22 @@ export const Header: React.FC<HeaderProps> = ({
             >
               <span className="flex items-center gap-2">
                 <FileCheck className="w-4 h-4 text-google-blue" />
-                <span>My Certificate (Participants & Volunteers)</span>
+                <span>DevFest Certificate (Participants & Volunteers)</span>
               </span>
               <span>→</span>
             </button>
+
+            <a
+              href="#non-devfest-certificates"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full py-2.5 px-4 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 rounded-xl text-xs font-bold flex items-center justify-between border border-emerald-200"
+            >
+              <span className="flex items-center gap-2">
+                <GraduationCap className="w-4 h-4 text-emerald-600" />
+                <span>Workshop Certificate (Non DevFest)</span>
+              </span>
+              <span>→</span>
+            </a>
 
             <a
               href={EVENT_DATA.callForSpeakers?.formUrl || 'https://docs.google.com/forms/d/e/1FAIpQLSevX5omJJKkgAZvVE5ZnNuGfqok0NtCjUYiQPKSSPdqIwB9vA/viewform'}

@@ -20,7 +20,8 @@ import {
   Globe,
   Building2,
   Calendar,
-  Activity
+  Activity,
+  GraduationCap
 } from 'lucide-react';
 import { YoutubeIcon } from '../ui/BrandIcons';
 import { SPEAKERS } from '../../data/speakers';
@@ -85,7 +86,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       { category: 'Event Sections', title: 'Speaker Gallery', subtitle: 'Meet the confirmed minds building tomorrow', href: '#speakers', icon: Users, tags: ['speakers', 'keynotes', 'experts'] },
       { category: 'Event Sections', title: 'Meet the Team', subtitle: 'Core Organizers & Volunteer Leads', href: '#team', icon: Users, tags: ['team', 'organizers', 'volunteers', 'leads', 'core'] },
       { category: 'Event Sections', title: 'Community Honors & Awards', subtitle: 'Celebrating developers, innovation & volunteer champions', href: '#awards-recognitions', icon: Award, tags: ['awards', 'honors', 'hall of fame'] },
-      { category: 'Event Sections', title: 'My Certificate (Participants & Volunteers)', subtitle: 'Download attendee or volunteer leadership certificate PDF', href: '#my-certificate', icon: FileCheck, tags: ['my certificate', 'certificate', 'volunteer', 'participant', 'verify', 'download', 'pdf', 'eventbrite'] },
+      { category: 'Event Sections', title: 'My Certificate (DevFest Attendees & Volunteers)', subtitle: 'Download attendee or volunteer leadership certificate PDF', href: '#my-certificate', icon: FileCheck, tags: ['my certificate', 'certificate', 'volunteer', 'participant', 'verify', 'download', 'pdf', 'eventbrite'] },
+      { category: 'Event Sections', title: 'Download Certificate - Non DevFest Event/Workshop', subtitle: 'Claim workshop & community event certificates with email token', href: '#non-devfest-certificates', icon: GraduationCap, tags: ['non devfest certificate', 'workshop', 'study jam', 'token', 'certificate', 'codelab', 'apps script'] },
       { category: 'Event Sections', title: 'DevFest Archive', subtitle: 'Explore past DevFest chapters (2023–2026) & 2025 Highlights', href: '#archive', icon: BookOpen, tags: ['archive', 'history', '2025', '2024', '2023'] },
     ];
 
