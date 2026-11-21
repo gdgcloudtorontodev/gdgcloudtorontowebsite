@@ -155,3 +155,67 @@ export interface PastDevfestYear {
     youtubeId: string;
   };
 }
+
+export interface PanelPerson {
+  name: string;
+  role: string;
+  organization: string;
+}
+
+export interface Panelist extends PanelPerson {
+  photo: string;
+  stance: string;
+}
+
+export interface Panel {
+  id: string;
+  title: string;
+  theme: string;
+  description: string;
+  timeSlot: string;
+  room: string;
+  moderator: PanelPerson;
+  panelists: Panelist[];
+  keyQuestions: string[];
+}
+
+export interface PodcastEpisode {
+  id: string;
+  episodeNumber: string;
+  title: string;
+  guest: string;
+  guestRole: string;
+  guestOrg: string;
+  duration: string;
+  topics: string[];
+  summary: string;
+  youtubeId?: string;
+  audioUrl?: string;
+  transcriptSnippet?: string;
+  recordedDate: string;
+}
+
+export type RadarRing = 'ADOPT' | 'TRIAL' | 'ASSESS' | 'WATCH';
+
+export interface RadarItem {
+  id: string;
+  name: string;
+  category: string;
+  ring: RadarRing;
+  description: string;
+  trend: 'UP' | 'NEW' | 'STABLE' | 'DOWN';
+  tags: string[];
+}
+
+export interface PrizeWinner {
+  id: string;
+  rank: 1 | 2 | 3;
+  prize: string;
+  category: string;
+  projectName: string;
+  teamName: string;
+  organization: string;
+  summary: string;
+  technology: string[];
+  githubUrl?: string;
+}
