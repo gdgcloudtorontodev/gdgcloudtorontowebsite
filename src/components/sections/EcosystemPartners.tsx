@@ -27,7 +27,7 @@ export const EcosystemPartners: React.FC = () => {
             </span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-gray-900 tracking-tight">
-            PARTNER WITH DEVFEST TORONTO
+            PARTNER WITH GDG CLOUD TORONTO
           </h2>
           <p className="text-base sm:text-lg text-gray-600 mt-4 leading-relaxed">
             Position your organization at the epicentre of Canada's developer ecosystem. DevFest 2026 brings together 1,500+ engineers, architects, founders, and students.
