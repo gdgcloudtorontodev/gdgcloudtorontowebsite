@@ -11,6 +11,7 @@ export interface EventConfig {
     venue: string;
     address: string;
     roomHighlight: string;
+    mapUrl?: string;
   };
   dates: {
     display: string;
@@ -35,10 +36,21 @@ export interface EventConfig {
     tier: string;
     price: string;
     portalUrl: string;
+    eventbriteUrl?: string;
+  };
+  callForSpeakers?: {
+    isOpen: boolean;
+    formUrl: string;
+  };
+  sponsorship?: {
+    interestFormUrl: string;
+    contactEmail: string;
   };
   socials: {
     meetup: string;
+    bevy: string;
     linkedin: string;
+    instagram: string;
     youtube: string;
     github: string;
     x: string;
@@ -94,66 +106,14 @@ export interface Workshop {
   githubRepoUrl?: string;
 }
 
-export interface Panel {
-  id: string;
-  title: string;
-  theme: string;
-  description: string;
-  timeSlot: string;
-  room: string;
-  moderator: {
-    name: string;
-    role: string;
-    organization: string;
-  };
-  panelists: {
-    name: string;
-    role: string;
-    organization: string;
-    photo: string;
-    stance: string;
-  }[];
-  keyQuestions: string[];
-}
-
-export interface PodcastEpisode {
-  id: string;
-  episodeNumber: string;
-  title: string;
-  guest: string;
-  guestRole: string;
-  guestOrg: string;
-  duration: string;
-  topics: string[];
-  summary: string;
-  youtubeId: string;
-  audioUrl: string;
-  transcriptSnippet: string;
-  recordedDate: string;
-}
-
 export interface Award {
   id: string;
   title: string;
-  category: 'Developer' | 'Community' | 'Innovation' | 'Volunteer' | 'Speaker' | 'Special Recognition';
+  category: 'Developer' | 'Community' | 'Innovation' | 'Volunteer' | 'Speaker' | 'Special Recognition' | 'Google Recognition';
   description: string;
   criteria: string[];
   icon: string;
   recipient2025?: string;
-}
-
-export interface Winner {
-  id: string;
-  rank: 1 | 2 | 3 | 'Special Mention';
-  teamName: string;
-  projectName: string;
-  category: string;
-  organization: string;
-  technology: string[];
-  prize: string;
-  summary: string;
-  demoUrl?: string;
-  githubUrl?: string;
 }
 
 export interface Volunteer {
@@ -166,6 +126,18 @@ export interface Volunteer {
   photo: string;
   quote: string;
   badge: string;
+  linkedin?: string;
+}
+
+export interface PastDevfestVideo {
+  id: string;
+  youtubeId: string;
+  url: string;
+  title: string;
+  category: string;
+  duration?: string;
+  description: string;
+  publishedYear: string;
 }
 
 export interface PastDevfestYear {
@@ -175,21 +147,11 @@ export interface PastDevfestYear {
   speakersCount: number;
   highlight: string;
   keynote: string;
-  featuredSpeakers: {
-    name: string;
-    organization: string;
-    topic: string;
-    photo: string;
-  }[];
   photoGallery: string[];
-}
-
-export interface RadarItem {
-  id: string;
-  name: string;
-  category: 'AI & Agents' | 'Cloud & Compute' | 'Infrastructure & Hardware' | 'Quantum & Next-Gen';
-  ring: 'ADOPT' | 'TRIAL' | 'ASSESS' | 'WATCH';
-  description: string;
-  trend: 'UP' | 'STABLE' | 'NEW';
-  tags: string[];
+  youtubeVideos: PastDevfestVideo[];
+  videoHighlight?: {
+    title: string;
+    url: string;
+    youtubeId: string;
+  };
 }

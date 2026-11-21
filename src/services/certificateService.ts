@@ -1,16 +1,27 @@
+export type CertificateCategory = 'CONFERENCE' | 'WORKSHOP' | 'VOLUNTEER';
+
 export interface VerifiedCertificate {
   participantName: string;
   email: string;
   ticketNumber: string;
+  eventbriteOrderNumber: string;
+  eventbriteEventId: string;
   credentialId: string;
   event: string;
   chapter: string;
   issueDate: string;
+  venue: string;
   tracks: string[];
   workshopsCompleted: string[];
   verificationHash: string;
   qrPayload: string;
   status: 'VERIFIED' | 'INVALID' | 'EXPIRED';
+  verificationSource: 'EVENTBRITE_API' | 'EVENTBRITE_REGISTRY' | 'LOCAL_REGISTRY' | 'VOLUNTEER_REGISTRY' | 'WORKSHOP_REGISTRY';
+  recipientType?: CertificateCategory;
+  selectedWorkshop?: string;
+  volunteerRole?: string;
+  hoursContributed?: number;
+  volunteerBadge?: string;
 }
 
 export interface VerificationResponse {
@@ -19,53 +30,30 @@ export interface VerificationResponse {
   data?: VerifiedCertificate;
 }
 
-// Preset verified records for deterministic demonstration
-const SAMPLE_RECORDS: Record<string, VerifiedCertificate> = {
-  'df26-12345': {
-    participantName: 'Alex Mercer',
-    email: 'participant@example.com',
-    ticketNumber: 'DF26-12345',
-    credentialId: 'GDG-TOR-2026-A8F2K',
-    event: 'GDG Cloud Toronto — DevFest 2026',
-    chapter: 'GDG Cloud Toronto (Google Developer Group)',
-    issueDate: 'October 24, 2026',
-    tracks: ['AI & Agentic Systems', 'Cloud & Distributed Kubernetes', 'Quantum Compute'],
-    workshopsCompleted: ['Building Autonomous AI Agents with MCP & LangGraph', 'Zero-to-Production Multimodal RAG with Gemini'],
-    verificationHash: 'sha256:7b9e28f32c810d7a6e1149fbc24a5e019b8823f03b2',
-    qrPayload: 'https://devfest.gdgcloudtoronto.com/credential/GDG-TOR-2026-A8F2K',
-    status: 'VERIFIED',
-  },
-  'df26-88990': {
-    participantName: 'Samantha Chen',
-    email: 'builder@toronto.dev',
-    ticketNumber: 'DF26-88990',
-    credentialId: 'GDG-TOR-2026-S9C34',
-    event: 'GDG Cloud Toronto — DevFest 2026',
-    chapter: 'GDG Cloud Toronto (Google Developer Group)',
-    issueDate: 'October 24, 2026',
-    tracks: ['Cloud Architecture', 'High-Throughput Inference with vLLM'],
-    workshopsCompleted: ['High-Throughput Open LLM Serving on GKE with vLLM & GPUs'],
-    verificationHash: 'sha256:4a1c5d9823f4618e77a28e932b0019283f12ab7612c',
-    qrPayload: 'https://devfest.gdgcloudtoronto.com/credential/GDG-TOR-2026-S9C34',
-    status: 'VERIFIED',
-  },
-};
+// DevFest 2026 Official Eventbrite Event ID
+export const DEVFEST_2026_EVENTBRITE_ID = '2004248355785';
 
 /**
- * Validates participant email & ticket number via simulated backend verification service.
- * In production, this proxies to `POST /api/certificates/verify`.
+ * Validates participant email & Eventbrite Order Number via secure API endpoint.
+ * 
+ * Flow:
+ * 1. Calls serverless `/api/verify-ticket` (Netlify Function / local server).
+ * 2. Backend queries the Eventbrite REST API v3 using the organizer's private API token.
+ * 3. Rejects invalid orders, mismatched emails, or canceled/refunded tickets.
  */
-export async function verifyCertificate(email: string, ticketNumber: string): Promise<VerificationResponse> {
-  // Simulate network latency of 600ms
-  await new Promise((resolve) => setTimeout(resolve, 600));
-
+export async function verifyCertificate(
+  email: string,
+  eventbriteOrderNumber: string,
+  category: CertificateCategory = 'CONFERENCE',
+  selectedWorkshop?: string
+): Promise<VerificationResponse> {
   const cleanEmail = email.trim().toLowerCase();
-  const cleanTicket = ticketNumber.trim().toLowerCase();
+  const cleanOrder = eventbriteOrderNumber.trim().replace(/^EB-/i, '').replace(/[^a-zA-Z0-9_-]/g, '');
 
-  if (!cleanEmail || !cleanTicket) {
+  if (!cleanEmail || !cleanOrder) {
     return {
       success: false,
-      message: 'Both registered email and ticket number are required.',
+      message: 'Both registered email and Eventbrite Order # / Ticket ID are required.',
     };
   }
 
@@ -74,53 +62,110 @@ export async function verifyCertificate(email: string, ticketNumber: string): Pr
   if (!emailRegex.test(cleanEmail)) {
     return {
       success: false,
-      message: 'Please provide a valid email address.',
+      message: 'Please provide a valid registered email address.',
     };
   }
 
-  // Check known sample records first
-  if (SAMPLE_RECORDS[cleanTicket] && SAMPLE_RECORDS[cleanTicket].email.toLowerCase() === cleanEmail) {
+  try {
+    const res = await fetch('/api/verify-ticket', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: cleanEmail,
+        orderNumber: cleanOrder,
+        category,
+        selectedWorkshop,
+      }),
+    });
+
+    if (res.ok) {
+      const result = await res.json();
+      return result;
+    } else {
+      const errorData = await res.json().catch(() => null);
+      return {
+        success: false,
+        message: errorData?.message || `Verification failed (HTTP ${res.status}). Please check your order details.`,
+      };
+    }
+  } catch {
     return {
-      success: true,
-      message: 'Participant credentials successfully verified against DevFest 2026 registry.',
-      data: SAMPLE_RECORDS[cleanTicket],
+      success: false,
+      message: 'Unable to reach the ticket verification service. Please check your internet connection and try again.',
     };
   }
+}
 
-  // If ticket format matches DF26-XXXXX or similar, dynamically generate verified participant info
-  if (cleanTicket.startsWith('df26-') || cleanTicket.startsWith('df-') || cleanTicket.length >= 6) {
-    const formattedTicket = ticketNumber.trim().toUpperCase();
-    const hash = Array.from(cleanEmail + cleanTicket).reduce((acc, char) => (acc * 31 + char.charCodeAt(0)) % 1000000, 0);
-    const credentialId = `GDG-TOR-2026-${hash.toString(16).toUpperCase().padStart(5, '0')}`;
-    
-    // Extract a nice display name from email
-    const namePart = cleanEmail.split('@')[0].replace(/[._-]/g, ' ');
-    const participantName = namePart.charAt(0).toUpperCase() + namePart.slice(1);
+export const verifyConferenceCertificate = (email: string, orderNumber: string) =>
+  verifyCertificate(email, orderNumber, 'CONFERENCE');
 
-    const dynamicRecord: VerifiedCertificate = {
-      participantName: participantName || 'DevFest 2026 Attendee',
-      email: cleanEmail,
-      ticketNumber: formattedTicket,
-      credentialId,
-      event: 'GDG Cloud Toronto — DevFest 2026',
-      chapter: 'GDG Cloud Toronto (Google Developer Group)',
-      issueDate: 'October 24, 2026',
-      tracks: ['AI & Agentic Systems', 'Cloud & Distributed Kubernetes', 'Quantum Compute'],
-      workshopsCompleted: ['Building Autonomous AI Agents with MCP & LangGraph', 'Zero-to-Production Multimodal RAG with Gemini'],
-      verificationHash: `sha256:${hash.toString(16)}${Date.now().toString(16)}`,
-      qrPayload: `https://devfest.gdgcloudtoronto.com/credential/${credentialId}`,
-      status: 'VERIFIED',
-    };
+/**
+ * Validates attendee credentials & generates an official Hands-on Workshop Certificate.
+ */
+export async function verifyWorkshopCertificate(
+  email: string,
+  orderNumber: string,
+  workshopTitle: string
+): Promise<VerificationResponse> {
+  return verifyCertificate(email, orderNumber, 'WORKSHOP', workshopTitle);
+}
 
+/**
+ * Validates volunteer credentials with the official hashed crew passphrase via the secure API endpoint.
+ * Date-locked to event day December 11, 2026.
+ */
+export async function verifyVolunteerCertificate(
+  volunteerName: string,
+  passphrase: string,
+  volunteerRole?: string,
+  volunteerEmail?: string
+): Promise<VerificationResponse> {
+  const cleanName = volunteerName.trim();
+  const cleanPassphrase = passphrase.trim();
+
+  if (!cleanName) {
     return {
-      success: true,
-      message: 'Participant credentials successfully verified against DevFest 2026 registry.',
-      data: dynamicRecord,
+      success: false,
+      message: 'Please enter your Full Name as it should appear on your Volunteer Certificate.',
     };
   }
 
-  return {
-    success: false,
-    message: 'No matching verified attendee found for this email & ticket number. Please check your DevFest 2026 confirmation email or try sample ticket "DF26-12345" with email "participant@example.com".',
-  };
+  if (!cleanPassphrase) {
+    return {
+      success: false,
+      message: 'Please enter the official Volunteer Crew Passphrase.',
+    };
+  }
+
+  try {
+    const res = await fetch('/api/verify-ticket', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        category: 'VOLUNTEER',
+        volunteerName: cleanName,
+        volunteerPassphrase: cleanPassphrase,
+        volunteerRole,
+        volunteerEmail: volunteerEmail?.trim(),
+      }),
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      return data;
+    } else {
+      const errorData = await res.json().catch(() => null);
+      return {
+        success: false,
+        message: errorData?.message || `Volunteer verification failed (HTTP ${res.status}).`,
+      };
+    }
+  } catch {
+    return {
+      success: false,
+      message: 'Unable to reach the ticket verification service. Please check your internet connection and try again.',
+    };
+  }
 }

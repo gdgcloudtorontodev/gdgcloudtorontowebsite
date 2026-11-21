@@ -14,7 +14,13 @@ import {
   ArrowRight,
   Code2,
   BookOpen,
-  Tv
+  Tv,
+  Ticket,
+  Mic,
+  Globe,
+  Building2,
+  Calendar,
+  Activity
 } from 'lucide-react';
 import { YoutubeIcon } from '../ui/BrandIcons';
 import { SPEAKERS } from '../../data/speakers';
@@ -61,21 +67,26 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       icon: any;
       tags: string[];
     }> = [
+      // Key Links & Priority Actions
+      { category: 'Tickets & Registration', title: 'Buy Tickets on Eventbrite', subtitle: 'Official registration portal for DevFest Toronto 2026', href: 'https://www.eventbrite.ca/e/google-developer-group-devfest-toronto-2026-tickets-2004248355785', icon: Ticket, tags: ['tickets', 'eventbrite', 'register', 'pass', 'admission'] },
+      { category: 'Speakers & Submissions', title: 'Call for Speakers Form (CFS)', subtitle: 'Submit talk proposal for AI, Cloud, Quantum & Architecture', href: 'https://docs.google.com/forms/d/e/1FAIpQLSevX5omJJKkgAZvVE5ZnNuGfqok0NtCjUYiQPKSSPdqIwB9vA/viewform', icon: Mic, tags: ['cfp', 'cfs', 'speaker', 'apply', 'proposal', 'talk'] },
+      { category: 'Sponsors & Alliance', title: 'Sponsorship & Partnership Portal', subtitle: 'Official DevFest sponsorship form & partner inquiry', href: '#sponsors', icon: Building2, tags: ['sponsor', 'partner', 'form', 'funding'] },
+      { category: 'Community Portals', title: 'Official Meetup (Future Events & Discounts)', subtitle: 'Join GDG Cloud Toronto Meetup community', href: 'https://www.meetup.com/gdg-cloud-toronto/', icon: Users, tags: ['meetup', 'tickets', 'discounts', 'events'] },
+      { category: 'Community Portals', title: 'Official GDG Bevy Chapter', subtitle: 'Join 5,800+ developers on gdg.community.dev', href: 'https://gdg.community.dev/gdg-cloud-toronto/', icon: Globe, tags: ['bevy', 'community', 'chapter', 'gdg'] },
+      { category: 'Community Portals', title: 'Official LinkedIn Page', subtitle: 'Follow GDG Cloud Toronto news & announcements', href: 'https://www.linkedin.com/company/18980745', icon: Users, tags: ['linkedin', 'company', 'social'] },
+      { category: 'Community Portals', title: 'Official Instagram (@gdgcloudtoronto)', subtitle: 'Photos, highlights & behind-the-scenes stories', href: 'https://www.instagram.com/gdgcloudtoronto/', icon: Users, tags: ['instagram', 'photos', 'stories', 'social'] },
+
       // Sections
+      { category: 'Community Telemetry', title: 'Community Growth Insights', subtitle: '5K Meetup, 7K LinkedIn, 1K Bevy, 6K DevFest, 100+ Events', href: '#community-growth', icon: Activity, tags: ['growth', 'insights', 'meetup', 'linkedin', 'stats', 'members', 'followers'] },
+      { category: 'Event Sections', title: 'Google DevFest 2026 Agenda', subtitle: 'Track 1 Conference Experience & Track 2 Hands-On Workshops', href: '#schedule', icon: Calendar, tags: ['agenda', 'schedule', 'timeline', 'track 1', 'track 2'] },
       { category: 'Experiences', title: 'AI Product Observatory', subtitle: 'Explore frontier AI tools & multi-agent architectures', href: '#ai-observatory', icon: Sparkles, tags: ['ai', 'gemini', 'mcp', 'agents', 'tools'] },
       { category: 'Experiences', title: 'Evolution of Computing', subtitle: '8-Era interactive storytelling landscape from Compute to Frontier', href: '#evolution-of-computing', icon: Compass, tags: ['history', 'eras', 'quantum', 'cloud', 'timeline'] },
       { category: 'Event Sections', title: 'YouTube Video Media Archive', subtitle: 'Watch keynotes, codelabs & podcasts from @gdgcloudtoronto1898', href: '#youtube-media', icon: Tv, tags: ['youtube', 'videos', 'recordings', 'talks', 'watch', 'media'] },
-      { category: 'Event Sections', title: 'Live Command Center', subtitle: 'Real-time event metrics, countdown & MTCC location', href: '#command-center', icon: Layers, tags: ['dashboard', 'stats', 'metrics', 'toronto'] },
-      { category: 'Event Sections', title: 'Technology Universe', subtitle: 'AI, Cloud, Quantum & Hardware infrastructure themes', href: '#technology-universe', icon: Cpu, tags: ['tracks', 'quantum', 'gke', 'tpu'] },
-      { category: 'Event Sections', title: 'Speaker Gallery', subtitle: 'Meet the 42+ minds building tomorrow', href: '#speakers', icon: Users, tags: ['speakers', 'keynotes', 'experts'] },
-      { category: 'Event Sections', title: 'DevFest Lab (Workshops)', subtitle: 'Hands-on coding labs & technical prerequisites', href: '#workshops', icon: Code2, tags: ['workshops', 'labs', 'hands-on', 'mcp', 'rag'] },
-      { category: 'Event Sections', title: 'The Forum (Panels)', subtitle: 'Unscripted debates on Agentic AI & Quantum Reality', href: '#forum-panels', icon: Users, tags: ['panels', 'debates', 'discussions'] },
-      { category: 'Event Sections', title: 'Podcast Studio', subtitle: 'Recording console UI with episodes & interviews', href: '#podcast-studio', icon: Radio, tags: ['podcast', 'audio', 'episodes', 'media'] },
-      { category: 'Event Sections', title: 'Community Honors & Awards', subtitle: 'Celebrating developers, innovation & volunteer champions', href: '#awards-honors', icon: Award, tags: ['awards', 'honors', 'hall of fame'] },
-      { category: 'Event Sections', title: 'Certificate Verification Portal', subtitle: 'Validate attendee certificate & download credential', href: '#certificate-center', icon: FileCheck, tags: ['certificate', 'verify', 'download', 'linkedin'] },
-      { category: 'Event Sections', title: 'Technology Radar 2026', subtitle: 'Adopt, Trial, Assess, Watch quadrants', href: '#technology-radar', icon: Compass, tags: ['radar', 'trends', 'technologies'] },
-      { category: 'Event Sections', title: 'Digital Campus & Venue Map', subtitle: 'Interactive MTCC North Building floor navigation', href: '#campus-venue', icon: MapPin, tags: ['map', 'venue', 'mtcc', 'directions', 'rooms'] },
-      { category: 'Event Sections', title: 'DevFest Archive', subtitle: 'Explore past DevFest chapters (2023–2026)', href: '#archive', icon: BookOpen, tags: ['archive', 'history', '2025', '2024', '2023'] },
+      { category: 'Event Sections', title: 'Speaker Gallery', subtitle: 'Meet the confirmed minds building tomorrow', href: '#speakers', icon: Users, tags: ['speakers', 'keynotes', 'experts'] },
+      { category: 'Event Sections', title: 'Meet the Team', subtitle: 'Core Organizers & Volunteer Leads', href: '#team', icon: Users, tags: ['team', 'organizers', 'volunteers', 'leads', 'core'] },
+      { category: 'Event Sections', title: 'Community Honors & Awards', subtitle: 'Celebrating developers, innovation & volunteer champions', href: '#awards-recognitions', icon: Award, tags: ['awards', 'honors', 'hall of fame'] },
+      { category: 'Event Sections', title: 'My Certificate (Participants & Volunteers)', subtitle: 'Download attendee or volunteer leadership certificate PDF', href: '#my-certificate', icon: FileCheck, tags: ['my certificate', 'certificate', 'volunteer', 'participant', 'verify', 'download', 'pdf', 'eventbrite'] },
+      { category: 'Event Sections', title: 'DevFest Archive', subtitle: 'Explore past DevFest chapters (2023–2026) & 2025 Highlights', href: '#archive', icon: BookOpen, tags: ['archive', 'history', '2025', '2024', '2023'] },
     ];
 
     // Add YouTube Videos
@@ -120,7 +131,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Hands-On Workshops',
         title: ws.title,
         subtitle: `${ws.difficulty} • ${ws.duration} • Instructor: ${ws.instructor.name}`,
-        href: '#workshops',
+        href: '#schedule',
         icon: Code2,
         tags: [ws.title.toLowerCase(), ws.track.toLowerCase(), ...ws.technology.map(t => t.toLowerCase())],
       });
@@ -200,7 +211,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                 <button
                   key={`${item.title}-${idx}`}
                   onClick={() => {
-                    onSelectAction(item.href);
+                    if (item.href.startsWith('http')) {
+                      window.open(item.href, '_blank');
+                    } else {
+                      onSelectAction(item.href);
+                    }
                     onClose();
                   }}
                   className="w-full text-left p-3 hover:bg-google-blue/5 rounded-xl transition-colors flex items-center justify-between group"

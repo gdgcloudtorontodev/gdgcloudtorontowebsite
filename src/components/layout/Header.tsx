@@ -11,24 +11,35 @@ import {
   FileCheck, 
   Radio, 
   Layers, 
-  Cpu,
-  Compass,
-  Zap,
-  Tv
+  Cpu, 
+  Compass, 
+  Zap, 
+  Tv, 
+  Ticket, 
+  Mic, 
+  Globe, 
+  Building2, 
+  ExternalLink, 
+  Users, 
+  Activity,
+  Mail
 } from 'lucide-react';
-import { YoutubeIcon } from '../ui/BrandIcons';
+import { YoutubeIcon, InstagramIcon } from '../ui/BrandIcons';
+import { SponsorTicker } from './SponsorTicker';
 import { EVENT_DATA } from '../../data/event';
 
 interface HeaderProps {
   onOpenCommandPalette: () => void;
   onOpenRegisterModal: () => void;
   onOpenCertificatePortal: () => void;
+  onOpenContactModal: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   onOpenCommandPalette,
   onOpenRegisterModal,
   onOpenCertificatePortal,
+  onOpenContactModal,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -41,17 +52,13 @@ export const Header: React.FC<HeaderProps> = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { label: 'Command Center', href: '#command-center', icon: Terminal },
-    { label: 'Technology', href: '#technology-universe', icon: Layers },
-    { label: 'AI Observatory', href: '#ai-observatory', icon: Sparkles, highlight: true },
+  const navLinks: { label: string; href: string; icon: any; highlight?: boolean }[] = [
+    { label: 'Agenda 2026', href: '#schedule', icon: Calendar },
     { label: 'Speakers', href: '#speakers', icon: Zap },
-    { label: 'Workshops', href: '#workshops', icon: Cpu },
-    { label: 'Evolution', href: '#evolution-of-computing', icon: Compass, highlight: true },
-    { label: 'Podcast', href: '#podcast-studio', icon: Radio },
-    { label: 'YouTube Media', href: '#youtube-media', icon: Tv },
-    { label: 'Certificates', href: '#certificate-center', icon: FileCheck },
-    { label: 'Archive', href: '#archive', icon: Calendar },
+    { label: 'Sponsors', href: '#sponsors', icon: Building2 },
+    { label: 'Meet Team', href: '#team', icon: Users },
+    { label: 'Certificate', href: '#my-certificate', icon: FileCheck },
+    { label: 'Awards & Recognition', href: '#awards-recognitions', icon: Award },
   ];
 
   return (
@@ -75,9 +82,39 @@ export const Header: React.FC<HeaderProps> = ({
               {EVENT_DATA.dates.display} • {EVENT_DATA.location.venue}
             </span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3.5">
             <a
-              href="https://www.youtube.com/@gdgcloudtoronto1898/featured"
+              href={EVENT_DATA.socials.bevy}
+              target="_blank"
+              rel="noreferrer"
+              className="text-gray-300 hover:text-google-green flex items-center gap-1 transition-colors hidden md:flex font-mono text-[10px]"
+            >
+              <Globe className="w-3 h-3 text-google-green" />
+              <span>Bevy Chapter</span>
+            </a>
+            <span className="text-gray-600 hidden md:inline">•</span>
+            <a
+              href={EVENT_DATA.callForSpeakers?.formUrl || 'https://docs.google.com/forms/d/e/1FAIpQLSevX5omJJKkgAZvVE5ZnNuGfqok0NtCjUYiQPKSSPdqIwB9vA/viewform'}
+              target="_blank"
+              rel="noreferrer"
+              className="text-gray-300 hover:text-google-yellow flex items-center gap-1 transition-colors hidden lg:flex font-mono text-[10px]"
+            >
+              <Mic className="w-3 h-3 text-google-yellow" />
+              <span>Call for Speakers</span>
+            </a>
+            <span className="text-gray-600 hidden lg:inline">•</span>
+            <a
+              href={EVENT_DATA.socials.instagram}
+              target="_blank"
+              rel="noreferrer"
+              className="text-gray-300 hover:text-pink-400 flex items-center gap-1 transition-colors hidden xl:flex font-mono text-[10px]"
+            >
+              <InstagramIcon size={13} className="text-pink-400" />
+              <span>@gdgcloudtoronto</span>
+            </a>
+            <span className="text-gray-600 hidden xl:inline">•</span>
+            <a
+              href={EVENT_DATA.socials.youtube}
               target="_blank"
               rel="noreferrer"
               className="text-gray-300 hover:text-red-400 flex items-center gap-1 transition-colors hidden sm:flex"
@@ -85,15 +122,16 @@ export const Header: React.FC<HeaderProps> = ({
               <YoutubeIcon size={14} className="text-red-400" />
               <span>@gdgcloudtoronto1898</span>
             </a>
-            <span className="text-gray-500 hidden sm:inline">•</span>
+            <span className="text-gray-600 hidden sm:inline">•</span>
             <button
               onClick={onOpenCertificatePortal}
-              className="text-gray-300 hover:text-white flex items-center gap-1 transition-colors"
+              className="text-gray-300 hover:text-white flex items-center gap-1 transition-colors font-medium"
+              title="Download Participant or Volunteer Certificate"
             >
               <FileCheck className="w-3 h-3 text-google-yellow" />
-              Verify Certificate
+              <span>My Certificate</span>
             </button>
-            <span className="text-gray-500">•</span>
+            <span className="text-gray-600">•</span>
             <button
               onClick={onOpenCommandPalette}
               className="text-gray-300 hover:text-white flex items-center gap-1.5 font-mono text-[10px] bg-white/10 px-2 py-0.5 rounded border border-white/20 hover:border-google-blue transition-colors"
@@ -105,39 +143,42 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
+      {/* Top Sponsor Recognition Marquee */}
+      <SponsorTicker />
+
       {/* Main Navbar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-18">
-          {/* Logo & Identity */}
-          <a href="#" className="flex items-center gap-3 group">
-            <div className="flex items-center gap-1 bg-[#F1F3F4] p-2 rounded-xl group-hover:bg-google-blue/10 transition-colors border border-[#DADCE0]">
+        <div className="flex items-center justify-between min-h-[4rem] sm:min-h-[4.5rem] py-2 gap-3 sm:gap-4">
+          {/* Logo & Identity - Protected against crushing and wrapping */}
+          <a href="#" className="flex items-center gap-2.5 sm:gap-3 group shrink-0 select-none">
+            <div className="flex items-center gap-1 bg-[#F1F3F4] p-1.5 sm:p-2 rounded-xl group-hover:bg-google-blue/10 transition-colors border border-[#DADCE0] shrink-0">
               <span className="w-2.5 h-2.5 rounded-full bg-google-blue"></span>
               <span className="w-2.5 h-2.5 rounded-full bg-google-red"></span>
               <span className="w-2.5 h-2.5 rounded-full bg-google-yellow"></span>
               <span className="w-2.5 h-2.5 rounded-full bg-google-green"></span>
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-gray-900 tracking-tight text-base sm:text-lg">
+            <div className="whitespace-nowrap">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <span className="font-bold text-gray-900 tracking-tight text-sm sm:text-base lg:text-lg whitespace-nowrap">
                   GDG Cloud Toronto
                 </span>
-                <span className="bg-google-blue text-white text-[10px] font-bold px-2 py-0.5 rounded-full tracking-wider uppercase font-mono">
+                <span className="bg-google-blue text-white text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full tracking-wider uppercase font-mono whitespace-nowrap">
                   DEVFEST 2026
                 </span>
               </div>
-              <span className="text-[11px] text-gray-500 font-mono block">
+              <span className="text-[10px] sm:text-[11px] text-gray-500 font-mono block whitespace-nowrap leading-tight">
                 Official Google Developer Group
               </span>
             </div>
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
-            {navLinks.slice(0, 8).map((item) => (
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2 overflow-x-auto no-scrollbar">
+            {navLinks.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                className={`px-2.5 xl:px-3 py-1.5 rounded-lg text-xs font-medium transition-all shrink-0 whitespace-nowrap ${
                   item.highlight
                     ? 'text-google-blue-dark bg-google-blue/10 hover:bg-google-blue/20 font-semibold'
                     : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
@@ -148,33 +189,75 @@ export const Header: React.FC<HeaderProps> = ({
             ))}
           </nav>
 
-          {/* Action CTAs */}
-          <div className="hidden sm:flex items-center gap-3">
+          {/* Action CTAs: Get Tickets on Eventbrite & Join Meetup */}
+          <div className="hidden sm:flex items-center gap-2 shrink-0">
             <button
               onClick={onOpenCommandPalette}
-              className="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+              className="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors shrink-0"
               title="Open Command Palette (⌘K)"
               aria-label="Command Palette"
             >
               <Search className="w-4 h-4" />
             </button>
 
-            <button
-              onClick={onOpenRegisterModal}
-              className="bg-google-blue hover:bg-google-blue-dark text-white font-medium text-xs sm:text-sm px-4 py-2 rounded-xl shadow-sm hover:shadow-google-subtle transition-all flex items-center gap-1.5"
+            <a
+              href={EVENT_DATA.registration.eventbriteUrl || 'https://www.eventbrite.ca/e/google-developer-group-devfest-toronto-2026-tickets-2004248355785'}
+              target="_blank"
+              rel="noreferrer"
+              className="bg-[#D1410C] hover:bg-[#b8380a] text-white font-semibold text-xs px-3 sm:px-3.5 py-2 rounded-xl shadow-xs transition-all flex items-center gap-1.5 shrink-0 whitespace-nowrap animate-ticket-flash"
             >
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Register Pass</span>
+              <Ticket className="w-3.5 h-3.5 shrink-0" />
+              <span>Get Tickets</span>
+            </a>
+
+            <a
+              href={EVENT_DATA.socials.meetup}
+              target="_blank"
+              rel="noreferrer"
+              className="bg-[#E0393E] hover:bg-[#c93136] text-white font-semibold text-xs px-3 sm:px-3.5 py-2 rounded-xl shadow-xs transition-all flex items-center gap-1.5 shrink-0 whitespace-nowrap"
+              title="Join Meetup for future events and discounted tickets"
+            >
+              <Users className="w-3.5 h-3.5 shrink-0" />
+              <span>Join Meetup</span>
+            </a>
+
+            <button
+              onClick={onOpenContactModal}
+              className="bg-gray-900 hover:bg-black text-white font-semibold text-xs px-3 sm:px-3.5 py-2 rounded-xl shadow-xs transition-all flex items-center gap-1.5 shrink-0 whitespace-nowrap cursor-pointer hover:shadow-md active:scale-95"
+              title="Contact GDG Cloud Toronto organizers (gdgcloudtoronto@gmail.com)"
+            >
+              <Mail className="w-3.5 h-3.5 shrink-0 text-google-yellow" />
+              <span>Contact Us</span>
             </button>
           </div>
 
-          {/* Mobile hamburger button */}
+          {/* Mobile buttons */}
           <div className="flex sm:hidden items-center gap-2">
-            <button
-              onClick={onOpenRegisterModal}
-              className="bg-google-blue text-white text-xs px-3 py-1.5 rounded-lg font-medium"
+            <a
+              href={EVENT_DATA.registration.eventbriteUrl || 'https://www.eventbrite.ca/e/google-developer-group-devfest-toronto-2026-tickets-2004248355785'}
+              target="_blank"
+              rel="noreferrer"
+              className="bg-[#D1410C] text-white text-[11px] px-2.5 py-1.5 rounded-lg font-medium flex items-center gap-1 animate-ticket-flash"
             >
-              Register
+              <Ticket className="w-3 h-3" />
+              <span>Tickets</span>
+            </a>
+            <a
+              href={EVENT_DATA.socials.meetup}
+              target="_blank"
+              rel="noreferrer"
+              className="bg-[#E0393E] text-white text-[11px] px-2.5 py-1.5 rounded-lg font-medium flex items-center gap-1"
+            >
+              <Users className="w-3 h-3" />
+              <span>Meetup</span>
+            </a>
+            <button
+              onClick={onOpenContactModal}
+              className="bg-gray-900 text-white text-[11px] px-2 py-1.5 rounded-lg font-medium flex items-center gap-1 shrink-0 cursor-pointer"
+              title="Contact Us (gdgcloudtoronto@gmail.com)"
+            >
+              <Mail className="w-3 h-3 text-google-yellow" />
+              <span>Contact</span>
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -212,6 +295,86 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           <div className="mt-4 pt-4 border-t border-gray-100 space-y-2">
+            <a
+              href={EVENT_DATA.registration.eventbriteUrl || 'https://www.eventbrite.ca/e/google-developer-group-devfest-toronto-2026-tickets-2004248355785'}
+              target="_blank"
+              rel="noreferrer"
+              className="w-full py-2.5 px-4 bg-[#D1410C] hover:bg-[#b8380a] text-white rounded-xl text-xs font-bold flex items-center justify-between animate-ticket-flash"
+            >
+              <span className="flex items-center gap-2">
+                <Ticket className="w-4 h-4" />
+                <span>Get Tickets on Eventbrite</span>
+              </span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+
+            <a
+              href={EVENT_DATA.socials.meetup}
+              target="_blank"
+              rel="noreferrer"
+              className="w-full py-2.5 px-4 bg-[#E0393E] hover:bg-[#c93136] text-white rounded-xl text-xs font-bold flex items-center justify-between"
+            >
+              <span className="flex items-center gap-2">
+                <Users className="w-4 h-4" />
+                <span>Join Meetup (Future Events & Discounts)</span>
+              </span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenContactModal();
+              }}
+              className="w-full py-2.5 px-4 bg-gray-900 hover:bg-black text-white rounded-xl text-xs font-bold flex items-center justify-between cursor-pointer"
+            >
+              <span className="flex items-center gap-2">
+                <Mail className="w-4 h-4 text-google-yellow" />
+                <span>Contact Us (gdgcloudtoronto@gmail.com)</span>
+              </span>
+              <span>→</span>
+            </button>
+
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenCertificatePortal();
+              }}
+              className="w-full py-2.5 px-4 bg-blue-50 hover:bg-blue-100 text-google-blue-dark rounded-xl text-xs font-bold flex items-center justify-between border border-blue-200"
+            >
+              <span className="flex items-center gap-2">
+                <FileCheck className="w-4 h-4 text-google-blue" />
+                <span>My Certificate (Participants & Volunteers)</span>
+              </span>
+              <span>→</span>
+            </button>
+
+            <a
+              href={EVENT_DATA.callForSpeakers?.formUrl || 'https://docs.google.com/forms/d/e/1FAIpQLSevX5omJJKkgAZvVE5ZnNuGfqok0NtCjUYiQPKSSPdqIwB9vA/viewform'}
+              target="_blank"
+              rel="noreferrer"
+              className="w-full py-2.5 px-4 bg-amber-500/10 hover:bg-amber-500/20 text-amber-800 rounded-xl text-xs font-semibold flex items-center justify-between"
+            >
+              <span className="flex items-center gap-2">
+                <Mic className="w-4 h-4 text-amber-600" />
+                <span>Call for Speakers (Apply Now)</span>
+              </span>
+              <span>→</span>
+            </a>
+
+            <a
+              href={EVENT_DATA.socials.bevy}
+              target="_blank"
+              rel="noreferrer"
+              className="w-full py-2.5 px-4 bg-green-500/10 hover:bg-green-500/20 text-green-800 rounded-xl text-xs font-semibold flex items-center justify-between"
+            >
+              <span className="flex items-center gap-2">
+                <Globe className="w-4 h-4 text-green-600" />
+                <span>Official Bevy Community Page</span>
+              </span>
+              <span>→</span>
+            </a>
+
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
@@ -227,7 +390,20 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
             
             <a
-              href="https://www.youtube.com/@gdgcloudtoronto1898/featured"
+              href={EVENT_DATA.socials.instagram}
+              target="_blank"
+              rel="noreferrer"
+              className="w-full py-2.5 px-4 bg-pink-500/10 hover:bg-pink-500/20 text-pink-700 rounded-xl text-xs font-semibold flex items-center justify-between"
+            >
+              <span className="flex items-center gap-2">
+                <InstagramIcon size={16} />
+                <span>Instagram @gdgcloudtoronto</span>
+              </span>
+              <span>→</span>
+            </a>
+
+            <a
+              href={EVENT_DATA.socials.youtube}
               target="_blank"
               rel="noreferrer"
               className="w-full py-2.5 px-4 bg-red-600/10 hover:bg-red-600/20 text-red-600 rounded-xl text-xs font-semibold flex items-center justify-between"

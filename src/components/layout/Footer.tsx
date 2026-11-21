@@ -8,9 +8,12 @@ import {
   ShieldCheck, 
   ArrowUp,
   FileCheck,
-  Globe
+  Globe,
+  Ticket,
+  Mic,
+  Building2
 } from 'lucide-react';
-import { GithubIcon, LinkedinIcon, YoutubeIcon, TwitterIcon } from '../ui/BrandIcons';
+import { GithubIcon, LinkedinIcon, YoutubeIcon, TwitterIcon, InstagramIcon } from '../ui/BrandIcons';
 import { EVENT_DATA } from '../../data/event';
 
 export const Footer: React.FC = () => {
@@ -36,24 +39,33 @@ export const Footer: React.FC = () => {
                 {EVENT_DATA.tagline}
               </h3>
               <p className="text-gray-400 text-sm max-w-2xl mt-1">
-                Join Canada’s premier developer community gathering in downtown Toronto for DevFest 2026.
+                Join Canada’s premier developer community gathering in Toronto for DevFest 2026 at {EVENT_DATA.location.venue}.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
               <a
-                href={EVENT_DATA.socials.meetup}
+                href={EVENT_DATA.socials.bevy}
                 target="_blank"
                 rel="noreferrer"
-                className="bg-white text-gray-900 hover:bg-gray-100 font-semibold px-5 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2 transition-all shadow-md"
+                className="bg-white text-gray-900 hover:bg-gray-100 font-semibold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2 transition-all shadow-md"
               >
-                <Globe className="w-4 h-4 text-google-red" />
-                <span>Join Meetup Chapter</span>
+                <Globe className="w-4 h-4 text-google-green" />
+                <span>Join Bevy Community</span>
+              </a>
+              <a
+                href={EVENT_DATA.registration.eventbriteUrl || 'https://www.eventbrite.ca/e/google-developer-group-devfest-toronto-2026-tickets-2004248355785'}
+                target="_blank"
+                rel="noreferrer"
+                className="bg-[#D1410C] hover:bg-[#b8380a] text-white font-semibold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2 transition-all shadow-md animate-ticket-flash"
+              >
+                <Ticket className="w-4 h-4" />
+                <span>Eventbrite Tickets</span>
               </a>
               <a
                 href="#register"
-                className="bg-google-blue hover:bg-google-blue-dark text-white font-semibold px-5 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2 transition-all shadow-md"
+                className="bg-google-blue hover:bg-google-blue-dark text-white font-semibold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2 transition-all shadow-md"
               >
-                <Sparkles className="w-4 h-4" />
+                <Sparkles className="w-4 h-4 text-google-yellow" />
                 <span>Claim Pass</span>
               </a>
             </div>
@@ -74,19 +86,22 @@ export const Footer: React.FC = () => {
               <span className="font-bold text-white text-sm">GDG Cloud Toronto</span>
             </div>
             <p className="text-xs text-gray-400 leading-relaxed mb-4">
-              An independent, community-led developer organization dedicated to Google Cloud, AI, and modern software engineering in Toronto, Ontario.
+              An official Google Developer Group chapter dedicated to Google Cloud, AI, and modern software engineering in Toronto, Ontario.
             </p>
             <div className="flex items-center gap-3 text-gray-400">
-              <a href={EVENT_DATA.socials.linkedin} target="_blank" rel="noreferrer" className="hover:text-google-blue transition-colors">
+              <a href={EVENT_DATA.socials.linkedin} target="_blank" rel="noreferrer" className="hover:text-google-blue transition-colors" title="LinkedIn Company Page">
                 <LinkedinIcon size={16} />
               </a>
-              <a href={EVENT_DATA.socials.github} target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
-                <GithubIcon size={16} />
+              <a href={EVENT_DATA.socials.instagram} target="_blank" rel="noreferrer" className="hover:text-pink-400 transition-colors" title="Instagram @gdgcloudtoronto">
+                <InstagramIcon size={16} />
               </a>
-              <a href={EVENT_DATA.socials.youtube} target="_blank" rel="noreferrer" className="hover:text-google-red transition-colors">
+              <a href={EVENT_DATA.socials.youtube} target="_blank" rel="noreferrer" className="hover:text-google-red transition-colors" title="Official YouTube Channel">
                 <YoutubeIcon size={16} />
               </a>
-              <a href={EVENT_DATA.socials.x} target="_blank" rel="noreferrer" className="hover:text-google-blue-light transition-colors">
+              <a href={EVENT_DATA.socials.github} target="_blank" rel="noreferrer" className="hover:text-white transition-colors" title="GitHub Organization">
+                <GithubIcon size={16} />
+              </a>
+              <a href={EVENT_DATA.socials.x} target="_blank" rel="noreferrer" className="hover:text-google-blue-light transition-colors" title="Twitter / X">
                 <TwitterIcon size={16} />
               </a>
             </div>
@@ -100,24 +115,24 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2 text-xs">
               <li><a href="#ai-observatory" className="text-gray-400 hover:text-google-blue transition-colors flex items-center gap-1.5"><Sparkles className="w-3 h-3 text-google-yellow" /> AI Product Observatory</a></li>
               <li><a href="#evolution-of-computing" className="text-gray-400 hover:text-google-blue transition-colors">Evolution of Computing</a></li>
-              <li><a href="#workshops" className="text-gray-400 hover:text-google-blue transition-colors">DevFest Lab Workshops</a></li>
-              <li><a href="#technology-radar" className="text-gray-400 hover:text-google-blue transition-colors">Technology Radar 2026</a></li>
-              <li><a href="#podcast-studio" className="text-gray-400 hover:text-google-blue transition-colors">Podcast & Media Studio</a></li>
-              <li><a href="#forum-panels" className="text-gray-400 hover:text-google-blue transition-colors">The Forum Panels</a></li>
+              <li><a href="#team" className="text-gray-400 hover:text-google-blue transition-colors">Meet the Team</a></li>
+              <li><a href="#youtube-media" className="text-gray-400 hover:text-google-blue transition-colors">YouTube Video Archive</a></li>
+              <li><a href="#awards-recognitions" className="text-gray-400 hover:text-google-yellow transition-colors">Awards & Recognitions</a></li>
+              <li><a href="#speakers" className="text-gray-400 hover:text-google-blue transition-colors">Confirmed Speakers</a></li>
             </ul>
           </div>
 
           {/* Col 3 */}
           <div>
             <h4 className="text-xs font-mono uppercase tracking-wider text-white mb-4">
-              Community & Credentials
+              Participation & Sponsors
             </h4>
             <ul className="space-y-2 text-xs">
+              <li><a href={EVENT_DATA.callForSpeakers?.formUrl || 'https://docs.google.com/forms/d/e/1FAIpQLSevX5omJJKkgAZvVE5ZnNuGfqok0NtCjUYiQPKSSPdqIwB9vA/viewform'} target="_blank" rel="noreferrer" className="text-google-yellow hover:underline flex items-center gap-1"><Mic className="w-3 h-3 text-google-yellow" /> Call for Speakers Form</a></li>
+              <li><a href="#sponsors" className="text-gray-400 hover:text-google-blue transition-colors flex items-center gap-1"><Building2 className="w-3 h-3" /> Sponsor DevFest 2026</a></li>
+              <li><a href={EVENT_DATA.sponsorship?.interestFormUrl || 'https://forms.gle/GP9ZNc3w8dLoTB1G8'} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-google-blue transition-colors">Sponsorship Interest Form</a></li>
+              <li><a href={EVENT_DATA.socials.bevy} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-google-green transition-colors flex items-center gap-1"><Globe className="w-3 h-3 text-google-green" /> Official Bevy Page</a></li>
               <li><a href="#speakers" className="text-gray-400 hover:text-google-blue transition-colors">Featured Speakers</a></li>
-              <li><a href="#volunteers" className="text-gray-400 hover:text-google-blue transition-colors">Volunteer Recognition</a></li>
-              <li><a href="#awards-honors" className="text-gray-400 hover:text-google-blue transition-colors">Community Honors & Awards</a></li>
-              <li><a href="#winners-podium" className="text-gray-400 hover:text-google-blue transition-colors">Challenge Winners</a></li>
-              <li><a href="#digital-credential" className="text-gray-400 hover:text-google-blue transition-colors">Digital Credentials</a></li>
               <li><a href="#certificate-center" className="text-gray-400 hover:text-google-yellow transition-colors flex items-center gap-1"><FileCheck className="w-3 h-3 text-google-yellow" /> Certificate Portal</a></li>
               <li><a href="#archive" className="text-gray-400 hover:text-google-blue transition-colors">DevFest Archive (2023–2026)</a></li>
             </ul>
@@ -139,10 +154,12 @@ export const Footer: React.FC = () => {
               </div>
               <div className="pt-2">
                 <a
-                  href="#campus-venue"
+                  href="https://maps.google.com/?q=190+Railside+Rd+North+York+ON+M3A+1A3"
+                  target="_blank"
+                  rel="noreferrer"
                   className="inline-flex items-center gap-1 text-google-blue-light hover:underline"
                 >
-                  <span>Interactive Venue Map</span>
+                  <span>Google Maps Directions</span>
                   <ExternalLink className="w-3 h-3" />
                 </a>
               </div>

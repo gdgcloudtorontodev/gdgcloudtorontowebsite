@@ -69,6 +69,53 @@
   -webkit-text-fill-color: transparent;
 }
 
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes verticalMarquee {
+  0% { transform: translateY(0%); }
+  100% { transform: translateY(-50%); }
+}
+
+.animate-marquee {
+  display: inline-flex;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-vertical-marquee {
+  animation: verticalMarquee 30s linear infinite;
+}
+
+.animate-vertical-marquee-slow {
+  animation: verticalMarquee 36s linear infinite;
+}
+
+.animate-vertical-marquee:hover,
+.animate-vertical-marquee-slow:hover {
+  animation-play-state: paused;
+}
+
+/* Flashing button animation for Eventbrite Ticket buttons */
+@keyframes ticketFlash {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(209, 65, 12, 0.7);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 22px 6px rgba(209, 65, 12, 0.85), 0 0 38px 10px rgba(234, 67, 53, 0.45);
+    filter: brightness(1.22);
+  }
+}
+
+.animate-ticket-flash {
+  animation: ticketFlash 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  display: inline-flex;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
     animation-delay: -1ms !important;

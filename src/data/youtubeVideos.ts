@@ -26,6 +26,21 @@ export interface YouTubeVideo {
 export const YOUTUBE_VIDEOS: YouTubeVideo[] = [
   // 1. DevFest Highlights
   {
+    id: 'yt-df-2025-official-highlights',
+    youtubeId: 'cqHQAcxV_Xs',
+    url: 'https://www.youtube.com/watch?v=cqHQAcxV_Xs',
+    title: 'GDG Cloud Toronto DevFest 2025 Official Highlights',
+    speaker: 'GDG Cloud Toronto Community',
+    organization: 'GDG Cloud Toronto',
+    category: 'DevFest Highlights',
+    duration: '04:12',
+    views: 'DevFest 2025 Highlights',
+    date: 'DevFest 2025',
+    thumbnail: 'https://img.youtube.com/vi/cqHQAcxV_Xs/hqdefault.jpg',
+    description: 'Official highlights from GDG Cloud Toronto DevFest 2025! Featuring keynote addresses, hands-on workshops, AI demos, sponsor expo, and developer community celebrations in Toronto.',
+    tags: ['DevFest2025', 'Highlights', 'Community', 'TorontoTech', 'GoogleCloud'],
+  },
+  {
     id: 'yt-df-highlight-1',
     youtubeId: '5znGR8XnLuE',
     url: 'https://youtu.be/5znGR8XnLuE',

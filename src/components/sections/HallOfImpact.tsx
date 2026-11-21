@@ -49,7 +49,7 @@ export const HallOfImpact: React.FC = () => {
           </div>
 
           <div className="bg-neutral-900/90 p-5 rounded-2xl border border-neutral-800 text-center">
-            <span className="text-3xl sm:text-4xl font-extrabold text-google-red font-mono block">65+</span>
+            <span className="text-3xl sm:text-4xl font-extrabold text-google-red font-mono block">100+</span>
             <span className="text-xs text-gray-400 font-medium mt-1 block">Active Volunteers</span>
           </div>
 

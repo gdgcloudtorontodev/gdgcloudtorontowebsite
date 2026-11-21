@@ -21,7 +21,7 @@ export const YouTubeVideoCarousel: React.FC = () => {
   const [activeModalVideo, setActiveModalVideo] = useState<YouTubeVideo | null>(null);
   const [isAutoPlaying, setIsAutoPlaying] = useState<boolean>(false);
 
-  const channelUrl = 'https://www.youtube.com/@gdgcloudtoronto1898/featured';
+  const channelUrl = 'https://www.youtube.com/@gdgcloudtoronto1898';
 
   const filterCategories: Array<'ALL' | VideoCategory> = [
     'ALL',

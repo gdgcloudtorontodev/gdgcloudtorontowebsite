@@ -1,6 +1,6 @@
 export interface Partner {
   name: string;
-  category: 'Titanium' | 'Platinum' | 'Gold' | 'Community' | 'Academic';
+  category: 'Titanium' | 'Platinum' | 'Gold' | 'Community' | 'Academic' | 'Sponsor' | 'Collaborator';
   logoText: string;
   accentColor: string;
   description: string;
@@ -9,51 +9,35 @@ export interface Partner {
 
 export const PARTNERS: Partner[] = [
   {
-    name: 'Google Cloud & Google Developers',
-    category: 'Titanium',
-    logoText: 'Google Cloud',
-    accentColor: '#4285F4',
-    description: 'Empowering developers worldwide with Vertex AI, Google Kubernetes Engine, and Google Cloud infrastructure.',
-    website: 'https://cloud.google.com/',
+    name: 'ECLARO: Global Staffing & Talent Solutions',
+    category: 'Sponsor',
+    logoText: 'ECLARO',
+    accentColor: '#005696',
+    description: 'Global custom talent solutions, enterprise technology staffing, and consulting services connecting top-tier tech professionals with industry-leading organizations.',
+    website: 'https://www.eclaro.com/',
   },
   {
-    name: 'Vector Institute for AI',
-    category: 'Platinum',
-    logoText: 'Vector Institute',
+    name: 'Alumni Relations, George Brown Polytechnic',
+    category: 'Collaborator',
+    logoText: 'George Brown Alumni',
+    accentColor: '#003366',
+    description: 'Fostering lifelong community connections, career development, mentorship, and tech innovation networks for George Brown Polytechnic graduates and developer alumni.',
+    website: 'https://www.georgebrown.ca/alumni',
+  },
+  {
+    name: 'Nirucraft Solutions',
+    category: 'Sponsor',
+    logoText: 'Nirucraft Solutions',
     accentColor: '#EA4335',
-    description: 'Canada’s premier independent research institute driving transformative AI excellence and commercialization.',
-    website: 'https://vectorinstitute.ai/',
+    description: 'Modern enterprise technology foundations, Generative AI agentic workflows, software intelligence, and developer community enablement in Ontario.',
+    website: 'https://nirucraft.com/',
   },
   {
-    name: 'Toronto Quantum Initiative',
-    category: 'Platinum',
-    logoText: 'Toronto Quantum',
-    accentColor: '#A142F4',
-    description: 'Advancing hybrid quantum-classical algorithms and high-performance computing in Ontario.',
-    website: 'https://utoronto.ca',
-  },
-  {
-    name: 'Canadian AI Builders Coalition',
-    category: 'Gold',
-    logoText: 'AI Builders CA',
+    name: 'ITCLAN Consulting Services Inc.',
+    category: 'Sponsor',
+    logoText: 'ITCLAN Consulting Services Inc.',
     accentColor: '#34A853',
-    description: 'Grassroots open-source alliance fostering Canadian developer innovation across agentic systems.',
-    website: 'https://github.com',
-  },
-  {
-    name: 'MaRS Discovery District',
-    category: 'Community',
-    logoText: 'MaRS Innovation',
-    accentColor: '#FBBC04',
-    description: 'North America’s largest urban innovation hub, supporting tech startups and developer talent.',
-    website: 'https://marsdd.com/',
-  },
-  {
-    name: 'University of Toronto Computer Science',
-    category: 'Academic',
-    logoText: 'U of T DCS',
-    accentColor: '#1A73E8',
-    description: 'World-renowned department of computer science pioneering deep learning, robotics, and distributed systems.',
-    website: 'https://web.cs.toronto.edu/',
+    description: 'Specialized enterprise technology consulting, digital solutions, cloud systems, and technical talent services driving organizational innovation.',
+    website: 'https://itclan.ca/',
   },
 ];

@@ -7,11 +7,14 @@ import {
   Calendar, 
   MapPin, 
   CheckCircle2,
-  BookOpen
+  BookOpen,
+  Mic,
+  ExternalLink
 } from 'lucide-react';
 import { LinkedinIcon, TwitterIcon, GithubIcon } from '../ui/BrandIcons';
 import { SPEAKERS } from '../../data/speakers';
 import { Speaker } from '../../types';
+import { EVENT_DATA } from '../../data/event';
 
 export const Speakers: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
@@ -22,9 +25,6 @@ export const Speakers: React.FC = () => {
     'Keynote',
     'AI & Agents',
     'Cloud Architecture',
-    'Quantum & Compute',
-    'Infrastructure',
-    'Community',
   ];
 
   const filteredSpeakers = selectedCategory === 'ALL'
@@ -41,14 +41,14 @@ export const Speakers: React.FC = () => {
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-google-blue/10 border border-google-blue/20 mb-3">
               <Sparkles className="w-3.5 h-3.5 text-google-blue" />
               <span className="text-xs font-mono font-bold tracking-widest text-google-blue-dark uppercase">
-                FLAGSHIP SPEAKER LINEUP
+                CONFIRMED SPEAKERS & VISIONARIES
               </span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-gray-900 tracking-tight">
               THE MINDS BUILDING TOMORROW
             </h2>
             <p className="text-sm sm:text-base text-gray-600 max-w-2xl mt-2 leading-relaxed">
-              Leading researchers from Google DeepMind, Google Cloud staff architects, quantum software pioneers, and grassroots developer advocates.
+              Google leaders, developer advocates, cloud architects, and enterprise AI engineering pioneers sharing cutting-edge insights on Agentic AI, MCP, and career growth.
             </p>
           </div>
 
@@ -70,8 +70,38 @@ export const Speakers: React.FC = () => {
           </div>
         </div>
 
+        {/* Call for Speakers Banner */}
+        <div className="bg-gradient-to-r from-google-blue via-indigo-900 to-gray-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl mb-12 flex flex-col md:flex-row items-center justify-between gap-6 border border-blue-500/30 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="space-y-2 text-center md:text-left relative z-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-white text-xs font-mono font-bold uppercase tracking-wider">
+              <Mic className="w-3.5 h-3.5 text-google-yellow" />
+              <span>CALL FOR SPEAKERS NOW OPEN</span>
+            </div>
+            <h3 className="text-xl sm:text-2xl font-extrabold text-white">
+              Have an Idea to Share with 1,500+ Canadian Developers?
+            </h3>
+            <p className="text-xs sm:text-sm text-blue-100 max-w-2xl leading-relaxed">
+              We welcome submissions across Multimodal AI, Agentic Systems, Google Cloud & Kubernetes, Quantum Computing, and Engineering Practices. Beginner and first-time community speakers warmly welcomed.
+            </p>
+          </div>
+
+          <div className="relative z-10 shrink-0">
+            <a
+              href={EVENT_DATA.callForSpeakers?.formUrl || 'https://docs.google.com/forms/d/e/1FAIpQLSevX5omJJKkgAZvVE5ZnNuGfqok0NtCjUYiQPKSSPdqIwB9vA/viewform'}
+              target="_blank"
+              rel="noreferrer"
+              className="bg-white hover:bg-gray-100 text-gray-900 font-bold text-xs sm:text-sm px-6 py-3.5 rounded-2xl shadow-lg transition-all flex items-center gap-2 group transform hover:scale-105"
+            >
+              <Mic className="w-4 h-4 text-google-red" />
+              <span>Submit Speaker Proposal</span>
+              <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+            </a>
+          </div>
+        </div>
+
         {/* Speaker Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredSpeakers.map((speaker) => (
             <div
               key={speaker.id}

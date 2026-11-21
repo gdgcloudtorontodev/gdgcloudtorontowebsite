@@ -3,38 +3,31 @@ import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { CommandPalette } from './components/layout/CommandPalette';
 import { Hero } from './components/sections/Hero';
-import { CommandCenter } from './components/sections/CommandCenter';
-import { TechnologyUniverse } from './components/sections/TechnologyUniverse';
 import { AiObservatory } from './components/sections/AiObservatory/AiObservatory';
 import { Speakers } from './components/sections/Speakers';
 import { Agenda } from './components/sections/Agenda';
-import { WorkshopLab } from './components/sections/WorkshopLab';
-import { PanelForum } from './components/sections/PanelForum';
 import { EvolutionOfComputing } from './components/sections/EvolutionOfComputing/EvolutionOfComputing';
-import { PodcastStudio } from './components/sections/PodcastStudio';
 import { YouTubeVideoCarousel } from './components/sections/YouTubeVideoCarousel';
 import { AwardsHonors } from './components/sections/AwardsHonors';
-import { WinnersPodium } from './components/sections/WinnersPodium';
 import { VolunteerRecognition } from './components/sections/VolunteerRecognition';
-import { TechRadar } from './components/sections/TechRadar';
+import { TeamSection } from './components/sections/TeamSection';
 import { CommunityConstellation } from './components/sections/CommunityConstellation';
-import { VenueCampus } from './components/sections/VenueCampus';
 import { DigitalCredential } from './components/sections/DigitalCredential';
 import { CertificateCenter } from './components/sections/CertificateCenter';
-import { DevfestIdCard } from './components/sections/DevfestIdCard';
 import { DevfestArchive } from './components/sections/DevfestArchive';
 import { HallOfImpact } from './components/sections/HallOfImpact';
 import { EcosystemPartners } from './components/sections/EcosystemPartners';
 import { ResourceCenter } from './components/sections/ResourceCenter';
-import { CommunityStories } from './components/sections/CommunityStories';
-import { CommunityWall } from './components/sections/CommunityWall';
 import { RegistrationModal } from './components/sections/RegistrationModal';
-import { Sparkles, ArrowRight, MapPin, Calendar } from 'lucide-react';
+import { ContactModal } from './components/sections/ContactModal';
+import { CommunityGrowthInsights } from './components/sections/CommunityGrowthInsights';
+import { Sparkles, ArrowRight, MapPin, Calendar, Ticket, Globe, ExternalLink, Users } from 'lucide-react';
 import { EVENT_DATA } from './data/event';
 
 export const App: React.FC = () => {
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [registerModalOpen, setRegisterModalOpen] = useState(false);
+  const [contactModalOpen, setContactModalOpen] = useState(false);
 
   const handleSelectCommandAction = (targetHref: string) => {
     const element = document.querySelector(targetHref);
@@ -44,7 +37,7 @@ export const App: React.FC = () => {
   };
 
   const handleOpenCertificate = () => {
-    const certEl = document.querySelector('#certificate-center');
+    const certEl = document.querySelector('#my-certificate') || document.querySelector('#certificate-center');
     if (certEl) {
       certEl.scrollIntoView({ behavior: 'smooth' });
     }
@@ -57,6 +50,7 @@ export const App: React.FC = () => {
         onOpenCommandPalette={() => setCommandPaletteOpen(true)}
         onOpenRegisterModal={() => setRegisterModalOpen(true)}
         onOpenCertificatePortal={handleOpenCertificate}
+        onOpenContactModal={() => setContactModalOpen(true)}
       />
 
       {/* Main Homepage Flow */}
@@ -64,80 +58,53 @@ export const App: React.FC = () => {
         {/* 1. Hero */}
         <Hero onRegisterClick={() => setRegisterModalOpen(true)} />
 
-        {/* 2. Live Command Center */}
-        <CommandCenter />
-
-        {/* 3. Technology Universe */}
-        <TechnologyUniverse />
-
-        {/* 4. Flagship Signature Experience: AI Product Observatory */}
-        <AiObservatory />
-
-        {/* 5. Featured Speakers */}
-        <Speakers />
-
-        {/* 6. Agenda / Timeline */}
-        <Agenda />
-
-        {/* 7. Workshops / DevFest Lab */}
-        <WorkshopLab />
-
-        {/* 8. Panel Discussions / The Forum */}
-        <PanelForum />
-
-        {/* 9. Flagship Signature Experience: The Evolution of Computing */}
-        <EvolutionOfComputing />
-
-        {/* 10. Podcast Studio */}
-        <PodcastStudio />
-
-        {/* 11. YouTube Video Broadcast Carousel */}
+        {/* 2. GDG Cloud Toronto ON YOUTUBE Section */}
         <YouTubeVideoCarousel />
 
-        {/* 12. Awards & Honors */}
-        <AwardsHonors />
+        {/* 3. Community Growth Insights (Daily dynamic refresh from official social handles) */}
+        <CommunityGrowthInsights />
 
-        {/* 13. Challenge Winners */}
-        <WinnersPodium />
+        {/* 4. 2026 Agenda & Sponsorship & Community Partnership */}
+        <Agenda />
 
-        {/* 14. Volunteer Recognition */}
-        <VolunteerRecognition />
-
-        {/* 15. Technology Radar 2026 */}
-        <TechRadar />
-
-        {/* 16. Community Constellation */}
-        <CommunityConstellation />
-
-        {/* 17. Venue & Digital Campus Map */}
-        <VenueCampus />
-
-        {/* 18. Participant Digital Credentials */}
-        <DigitalCredential />
-
-        {/* 19. Certificate Center */}
-        <CertificateCenter />
-
-        {/* 20. DevFest ID Card */}
-        <DevfestIdCard />
-
-        {/* 21. DevFest Historical Archive */}
-        <DevfestArchive />
-
-        {/* 22. Hall of Impact */}
-        <HallOfImpact />
-
-        {/* 23. Ecosystem Partners & Sponsors */}
+        {/* 5. Sponsorship & Ecosystem Partners */}
         <EcosystemPartners />
 
-        {/* 24. Developer Resource Center */}
+        {/* 6. Your DEVFEST CREDENTIAL Section */}
+        <DigitalCredential />
+
+        {/* 8. Certificate Center (Eventbrite Verified & Vector PDF Download) */}
+        <CertificateCenter />
+
+        {/* 11. DevFest Archive (Historical Legacy) */}
+        <DevfestArchive />
+
+        {/* 12. Awards & Recognitions Showcase */}
+        <AwardsHonors />
+
+        {/* 13. Volunteer Recognition & Awards (100+ Volunteers) */}
+        <VolunteerRecognition />
+
+        {/* 14. Meet the Team (Core Organizers, Volunteer Leads) */}
+        <TeamSection />
+
+        {/* 15. Confirmed & Featured Speakers */}
+        <Speakers />
+
+        {/* 16. Flagship Signature Experience: AI Product Observatory */}
+        <AiObservatory />
+
+        {/* 17. Flagship Signature Experience: The Evolution of Computing */}
+        <EvolutionOfComputing />
+
+        {/* 18. Community Constellation & Global Chapters */}
+        <CommunityConstellation />
+
+        {/* 19. Hall of Impact */}
+        <HallOfImpact />
+
+        {/* 20. Developer Resource Center */}
         <ResourceCenter />
-
-        {/* 25. From the Community Stories */}
-        <CommunityStories />
-
-        {/* 26. The Community Wall */}
-        <CommunityWall />
 
         {/* 27. Final Call to Action Section */}
         <section id="register" className="py-24 bg-gradient-to-br from-google-blue via-google-blue-dark to-indigo-950 text-white relative overflow-hidden">
@@ -153,26 +120,40 @@ export const App: React.FC = () => {
             </h2>
 
             <p className="text-sm sm:text-lg text-blue-100 max-w-2xl mx-auto leading-relaxed">
-              Reserve your free pass for DevFest 2026. Explore hands-on labs, discover the AI Product Observatory, and connect with 1,500+ developers.
+              Get your tickets for DevFest 2026 on Eventbrite or join our community on Meetup for upcoming events, workshops, and discounted ticket access.
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-              <button
-                onClick={() => setRegisterModalOpen(true)}
-                className="bg-white text-gray-900 hover:bg-gray-100 font-bold text-sm sm:text-base px-8 py-4 rounded-2xl shadow-xl transition-all flex items-center gap-2 transform hover:-translate-y-0.5"
+              <a
+                href={EVENT_DATA.registration.eventbriteUrl || 'https://www.eventbrite.ca/e/google-developer-group-devfest-toronto-2026-tickets-2004248355785'}
+                target="_blank"
+                rel="noreferrer"
+                className="bg-[#D1410C] hover:bg-[#b8380a] text-white font-bold text-sm sm:text-base px-8 py-4 rounded-2xl shadow-xl transition-all flex items-center gap-2 transform hover:-translate-y-0.5 animate-ticket-flash"
               >
-                <Sparkles className="w-4 h-4 text-google-yellow" />
-                <span>Claim Developer Pass (Free)</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
+                <Ticket className="w-5 h-5" />
+                <span>Get Tickets on Eventbrite</span>
+                <ExternalLink className="w-4 h-4" />
+              </a>
 
               <a
                 href={EVENT_DATA.socials.meetup}
                 target="_blank"
                 rel="noreferrer"
-                className="bg-white/10 hover:bg-white/20 text-white font-semibold text-sm sm:text-base px-6 py-4 rounded-2xl border border-white/30 transition-all"
+                className="bg-[#E0393E] hover:bg-[#c93136] text-white font-bold text-sm sm:text-base px-7 py-4 rounded-2xl shadow-xl transition-all flex items-center gap-2 transform hover:-translate-y-0.5"
               >
-                Join Meetup Chapter
+                <Users className="w-5 h-5" />
+                <span>Join Meetup for Future Events & Discounts</span>
+                <ExternalLink className="w-4 h-4" />
+              </a>
+
+              <a
+                href={EVENT_DATA.socials.bevy}
+                target="_blank"
+                rel="noreferrer"
+                className="bg-white/10 hover:bg-white/20 text-white font-semibold text-sm sm:text-base px-6 py-4 rounded-2xl border border-white/30 transition-all flex items-center gap-2"
+              >
+                <Globe className="w-4 h-4 text-google-green" />
+                <span>Join Bevy Chapter</span>
               </a>
             </div>
 
@@ -205,6 +186,12 @@ export const App: React.FC = () => {
       <RegistrationModal
         isOpen={registerModalOpen}
         onClose={() => setRegisterModalOpen(false)}
+      />
+
+      {/* Contact Organizers Modal Dialog */}
+      <ContactModal
+        isOpen={contactModalOpen}
+        onClose={() => setContactModalOpen(false)}
       />
     </div>
   );

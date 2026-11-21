@@ -7,7 +7,8 @@ import {
   Loader2, 
   QrCode, 
   Ticket,
-  AlertCircle
+  AlertCircle,
+  ExternalLink
 } from 'lucide-react';
 import { submitRegistration, RegistrationFormData } from '../../services/registrationService';
 import { EVENT_DATA } from '../../data/event';
@@ -76,7 +77,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                 Claim Your Developer Pass
               </h3>
               <p className="text-xs sm:text-sm text-blue-100 mt-1">
-                Full access to keynotes, 16 hands-on workshops, digital recording studio, and breakfast/lunch.
+                Full access to 8+ keynote talks, 2 hands-on workshops, exhibits arena, and community networking.
               </p>
             </div>
 
@@ -90,7 +91,42 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
         </div>
 
         {/* Modal Form Body */}
-        <div className="p-6 sm:p-8">
+        <div className="p-6 sm:p-8 space-y-6">
+          {/* Eventbrite Official Pass Banner */}
+          <div className="bg-gradient-to-r from-orange-50 via-amber-50 to-orange-50 rounded-2xl p-4 sm:p-5 border border-orange-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="space-y-1 text-center sm:text-left">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-orange-100 text-orange-800 text-[10px] font-mono font-bold uppercase">
+                <Ticket className="w-3 h-3 text-orange-600" />
+                <span>OFFICIAL TICKETING PORTAL</span>
+              </div>
+              <h4 className="text-base font-extrabold text-gray-900">
+                Get Tickets on Eventbrite
+              </h4>
+              <p className="text-xs text-gray-600">
+                Reserve your verified seat, access workshop tracks, and get automated calendar invites.
+              </p>
+            </div>
+
+            <a
+              href={EVENT_DATA.registration.eventbriteUrl || 'https://www.eventbrite.ca/e/google-developer-group-devfest-toronto-2026-tickets-2004248355785'}
+              target="_blank"
+              rel="noreferrer"
+              className="bg-[#D1410C] hover:bg-[#b8380a] text-white font-bold text-xs sm:text-sm px-5 py-3 rounded-xl transition-all shadow-md flex items-center gap-2 shrink-0 group transform hover:scale-105 animate-ticket-flash"
+            >
+              <Ticket className="w-4 h-4" />
+              <span>Purchase on Eventbrite</span>
+              <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+            </a>
+          </div>
+
+          <div className="relative flex items-center justify-center">
+            <div className="border-t border-gray-200 w-full"></div>
+            <span className="bg-white px-3 text-[11px] font-mono text-gray-400 uppercase tracking-wider shrink-0">
+              OR REGISTER DIGITAL HQ BADGE
+            </span>
+            <div className="border-t border-gray-200 w-full"></div>
+          </div>
+
           {successTicket ? (
             <div className="text-center space-y-4 py-4 animate-in fade-in zoom-in-95">
               <div className="w-16 h-16 rounded-full bg-green-100 text-google-green flex items-center justify-center mx-auto">
