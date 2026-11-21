@@ -1,4 +1,4 @@
-import { Award } from '../types';
+import { Award, PrizeWinner } from '../types';
 
 export const COMMUNITY_AWARDS: Award[] = [
   {
@@ -15,3 +15,6 @@ export const COMMUNITY_AWARDS: Award[] = [
     recipient2025: 'GDG Cloud Toronto (Presented by Google)',
   },
 ];
+
+// Hackathon winners shown in the WinnersPodium section. Populate once results are announced.
+export const PRIZE_WINNERS: PrizeWinner[] = [];
